@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Varela Round', sans-serif;
+    background: #F0F6F6;
+    
+    /* color: #FF8552; */
+    color: black;
+}
+
+.house{
+    font-size: 22px;
+}
+
+.Person{
+    font-size: 22px;
+}
+
+#header{
+    /* display:flex;
+    justify-content: left;
+    align-items:normal;
+    margin-right: auto;
+    padding-left: 15px; */
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    
+    font-family: 'Cookie';
+    /* color: #FF8552; */
+    
+}
+
+.about{
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+.TopMenu{
+    display: flex;
+    align-items: center; 
+    justify-content: right;
+    padding-right: 50px;
+    padding-bottom: 8px;
+    background: #fff;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.TopMenu li{
+    list-style: none;
+    align-items: right;
+    justify-content: right;
+    padding-left: 14px;
+    padding-top: 10px;
+    padding-right: 0px;
+}
+a{
+    color:black;
+}
+
+.Choose{
+    text-align: center; 
+    font-weight: lighter;
+    margin-bottom: 25px; 
+    margin-right: auto;
+    font-size: 18px;
+
+}
+.Choose1{
+    text-align: center; 
+    font-weight: 600;
+    margin-bottom: 25px; 
+    margin-right: auto; 
+    font-weight: 600;
+    font-size: 30px;
+
+}
+
+img{
+    border-radius: 2%;
+    object-fit: cover;
+}
+
+.color{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+
+.Icons{
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.One{
+    margin-right: 15px;
+    
+}
+.Two{
+    margin-right: 15px;
+}
+
+.Three{
+    margin-right: 15px;
+}
+.Four{
+    margin-right: 15px;
+}
+
+.Desc{
+    list-style: none;
+    padding-top:7px;
+    font-size:16px;
+}
+
+.Space1{
+    padding-left: 100px;
+}
+
+.Space2{
+    padding-left: 253px;
+}
+
+.Space3{
+    padding-left: 276px;
+}
+
+.Space4{
+    padding-left: 276px;
+}
+
+.color img{
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -webkit-transition: all 2s ease;
+    }
+    
+.color img:hover{
+    filter: grayscale(0%);
+    filter: gray;
+    -webkit-filter: grayscale(0%);
+    filter: none;
+    transition: 2s ease;
+}
+
+.Descriptions{
+    margin-left: auto;
+    margin-right: 100px;
+    display: flex;
+    justify-content:center;
+    
+}
+
+
+
+

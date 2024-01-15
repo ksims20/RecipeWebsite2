@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Varela Round', sans-serif;
+    background: #F0F6F6;
+    
+    /* color: #FF8552; */
+    color: black;
+
+}
+a{
+    color: black;
+    text-decoration: none;
+    list-style: none;
+}
+
+.house{
+    font-size: 22px;
+    transition: .4s;
+}
+.house:hover{
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgb(223, 186, 36);
+}
+
+.Person{
+    font-size: 22px;
+    transition: .4s;
+}
+.Person:hover{
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgb(223, 186, 36);
+}
+
+.about{
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 20px;
+    padding-top: 2px;
+    transition: .4s;
+}
+.about:hover{
+    padding-left: 30px;
+    color: rgb(223, 186, 36);
+}
+
+.sidebar{
+    position: fixed;
+    left: 0px;
+    width: 200px;
+    height: 100%;
+    background: #F0F6F6;
+}
+.sidebar ul a{
+    display: block; 
+    height: 100%;
+    width: 100%;
+    line-height: 65px;
+    font-size: 20px;
+    color: black;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255,255,255,.1);
+    /* border-bottom: 1px solid black; */
+    /* border-right: 1px solid black; */
+    transition: .4s;
+}
+ul li:hover a{
+    padding-left: 50px;
+    color: red;
+}
+
+.sidebar ul a ion-icon{
+    margin-left: 10px;
+
+}
+
+
+
+
+
+.house{
+    font-size: 22px;
+}
+
+.Person{
+    font-size: 22px;
+}
+
+#header{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Cookie';
+    /* color: #FF8552; */
+    color: black;
+    
+}
+
+.TopMenu{
+    display: flex;
+    align-items: center; 
+    justify-content: right;
+    padding-right: 50px;
+    padding-bottom: 8px;
+    background: #F0F6F6;
+    
+    margin-left: auto;
+    margin-right: auto;
+    /* border-bottom: 2px solid black; */
+}
+
+.TopMenu li{
+    list-style: none;
+    align-items: right;
+    justify-content: right;
+    padding-left: 14px;
+    padding-top: 10px;
+    padding-right: 0px;
+}
+
+
+.NoShow{
+    background-color: transparent;
+    border: none;
+    color:black;
+    font-size: 22px;
+
+}
+.NoShow:hover{
+    background-color: #F0F6F6;
+    border-radius:40%;
+}
+
+.sidebar .selected{
+    color:rgb(223, 186, 36);
+}
+
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 20px;
+    padding-left: 200px;
+    margin-left: 20px;
+    padding-right: auto;
+    padding-top: auto;
+    font-family: 'Varela Round', sans-serif;
+    
+}
+
+section{
+    text-align: center;
+}
+
+#breakfast-results img {
+    max-width: 50%;
+    border-radius: 2%;
+    object-fit: cover;
+    
+}
+
+
+#lunch-results img {
+    max-width: 50%;
+    border-radius: 2%;
+    object-fit: cover;
+    
+}
+#dinner-results img {
+    max-width: 50%;
+    border-radius: 2%;
+    object-fit: cover;
+    
+}
+
+#dessert-results img {
+    max-width: 50%;
+    border-radius: 2%;
+    object-fit: cover;
+    
+}
+
+
+
+form {
+    padding-left: 150px;
+    padding-top: 20px;
+    padding-right: 20px;
+    display: grid;
+    grid-template-columns: 130px auto 100px;
+    column-gap: 40px;
+    row-gap: 30px;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+
+label,
+input,
+button {
+    font-size: 1.1em;
+    line-height: 1.6em;
+}
+
+label {
+    text-align: right;
+    font-weight: bold;
+
+    
+}
+
+input {
+    border: solid 1px #CCC;
+    border-radius: 4px;
+    padding-left: 150px;  
+    width: 100%;
+    
+    
+}
+
+button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: solid 1px #FFF;
+    background-color: black;
+    color: white;
+    /* grid-column: 2; */
+    justify-self: flex-start;
+}
+
+button:hover {
+    color: rgb(223, 186, 36);
+    border: solid 1px #CCC;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+

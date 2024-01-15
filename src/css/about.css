@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Varela Round', sans-serif;
+    background: #F0F6F6;
+    
+    /* color: #FF8552; */
+    color: black;
+}
+
+.house{
+    font-size: 22px;
+}
+
+.Person{
+    font-size: 22px;
+}
+
+#header{
+    /* display:flex;
+    justify-content: left;
+    align-items:normal;
+    margin-right: auto;
+    padding-left: 15px; */
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    
+    font-family: 'Cookie';
+    /* color: #FF8552; */
+    
+}
+
+
+.house{
+    font-size: 22px;
+    transition: .4s;
+}
+.house:hover{
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgb(223, 186, 36);
+}
+
+.Person{
+    font-size: 22px;
+    transition: .4s;
+}
+.Person:hover{
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgb(223, 186, 36);
+}
+
+.about{
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 20px;
+    padding-top: 2px;
+    transition: .4s;
+    
+}
+.about:hover{
+    padding-left: 30px;
+    color: rgb(223, 186, 36);
+}
+
+
+.TopMenu{
+    display: flex;
+    align-items: center; 
+    justify-content: right;
+    padding-right: 50px;
+    padding-bottom: 8px;
+    background: #F0F6F6;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.TopMenu li{
+    list-style: none;
+    align-items: right;
+    justify-content: right;
+    padding-left: 14px;
+    padding-top: 10px;
+    padding-right: 0px;
+}
+a{
+    color:black;
+}
+
+.text{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding-top: 20px;
+    font-size: 50px;
+    padding-bottom: 20px;
+    font-family: 'Cookie';
+}
+
+p{
+    margin: auto;
+    padding-top: 20px;
+    text-align: center;
+    text-overflow: clip;
+    text-indent: 20px;
+    line-height: 1.8;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.divider{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.LeftPhoto{
+flex: 1;
+height:100%;
+margin:auto;
+}
+
+.RightSide{
+    flex: 1;
+    height:100%;
+    margin: auto;
+    padding-right: 10px;
+    padding-top: 10px;
+
+}
+
+img{
+    border-radius: 4%;
+    object-fit: cover;
+}
+
+.One{
+    padding-top: 50px;
+    padding-left: 100px;
+}
