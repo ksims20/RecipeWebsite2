@@ -2,16 +2,12 @@ import React from 'react';
 import { homeOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import './css/register.css';
-
 import { Link} from 'react-router-dom'
 
 
 
 import 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-
-
-
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {

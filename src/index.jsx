@@ -3,6 +3,8 @@ import { homeOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import './css/index2.css';
 
+//Front page
+
 const WelcomePage = () => {
   return (
     <>
@@ -12,7 +14,7 @@ const WelcomePage = () => {
           </a>
 
           <h1 id="header">
-            <b>Cookly</b>
+          <b>Cookly</b>
           </h1>
 
           
@@ -42,52 +44,49 @@ const WelcomePage = () => {
               <img
                 className="One"
                 src="https://cdn.thelondoneconomic.com/wp-content/uploads/2021/08/d6209be9-how-to-make-the-perfect-full-english-breakfast-fry-up-scaled.jpeg"
-                width="300px"
-                height="400px"
                 alt="Breakfast"
               />
+              <label className="Space1">Breakfast</label>
             </a>
 
             <a className="Photos" href="/lunch.jsx">
               <img
                 className="Two"
                 src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?cs=srgb&dl=pexels-robin-stickel-70497.jpg&fm=jpg"
-                width="300px"
-                height="400px"
                 alt="Lunch"
               />
+              <label className="Space2">Lunch</label>
             </a>
 
             <a className="Photos" href="/dinner.jsx">
               <img
                 className="Three"
                 src="https://media.istockphoto.com/id/450705255/photo/homemade-turkey-thanksgiving-dinner.jpg?s=612x612&w=0&k=20&c=Bul88e51JYCw6o2JaLyvPKCZpg2R-qd2621978t7HRI="
-                width="300px"
-                height="400px"
                 alt="Dinner"
               />
+              <label className="Space3">Dinner</label>
             </a>
 
             <a className="Photos" href="/dessert.jsx">
               <img
                 className="Four"
                 src="https://tmbidigitalassetsazure.blob.core.windows.net/wpthumbnailsprod/EasyFourLayerChocolateDessert%20DIYD%20187568%20042621%20H_thumbnail.jpeg"
-                width="300px"
-                height="400px"
                 alt="Dessert"
               />
+              <label className="Space4">Dessert</label>
             </a>
+            
           </div>
         </div>
 
-        <div className="Descriptions">
+        {/* <div className="Descriptions">
           <li className="Desc">
             <label className="Space1">Breakfast</label>
             <label className="Space2">Lunch</label>
             <label className="Space3">Dinner</label>
             <label className="Space4">Dessert</label>
           </li>
-        </div>
+        </div> */}
 
     </>
   );
