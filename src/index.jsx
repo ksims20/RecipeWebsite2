@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { homeOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import './css/index2.css';

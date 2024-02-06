@@ -1,0 +1,33 @@
+First I did npm install firebase outside of my src folder
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAtbyENrTnzUS3BC2yqads9GRWT3fIyLiA",
+  authDomain: "capstone2-f5acb.firebaseapp.com",
+  databaseURL: "https://capstone2-f5acb-default-rtdb.firebaseio.com",
+  projectId: "capstone2-f5acb",
+  storageBucket: "capstone2-f5acb.appspot.com",
+  messagingSenderId: "578810233758",
+  appId: "1:578810233758:web:a3a5e23d4345da5e0b8c8f",
+  measurementId: "G-Z8V6JJ3ZWQ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+copied that into app.js
+
+imported statements into login.jsx and register.jsx
+
+npm install -g firebase-tools  to host my site with Firebase Hosting
+

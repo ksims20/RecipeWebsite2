@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { homeOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import './css/login.css'; 
+import { Link } from 'react-router-dom'
+
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+import 'firebase/auth';
+import 'firebase/database';
 
 const Login = () => {
+  const [email,setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try{
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth,email,password);
+    } catch (error) {
+      console.error('Login Error',error.message);
+    }
+  }
+
   return (
     <>
         <div className="TopMenu">
@@ -36,14 +57,14 @@ const Login = () => {
             </div>
             <div className="right-side">
               <div className="wrapper">
-                <form className="box" action="">
+                <form className="box" onSubmit={handleLogin}>
                   <h1>Login</h1>
                   <div className="input-box">
-                    <input type="text" placeholder="Email" required />
+                    <input type="text" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                     <IonIcon name="person"></IonIcon>
                   </div>
                   <div className="input-box">
-                    <input type="password" placeholder="Password" required />
+                    <input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                     <IonIcon name="lock-closed"></IonIcon>
                   </div>
                   <button type="submit" className="btn">
@@ -51,7 +72,7 @@ const Login = () => {
                   </button>
                   <div className="register-link">
                     <p>
-                      Don't have an account? <a href="/register.jsx">Register</a>
+                      Don't have an account? <Link to="/register.jsx">Register</Link>
                     </p>
                   </div>
                 </form>

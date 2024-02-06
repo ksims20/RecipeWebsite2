@@ -10,7 +10,7 @@
 
 body{
     font-family: 'Varela Round', sans-serif;
-    
+
 }
 
 .house{
@@ -734,6 +734,7 @@ padding: 20px 45px 20px 20px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
+    color: black;
 }
 
 h3{

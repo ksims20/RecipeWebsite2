@@ -1,16 +1,69 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { homeOutline, personOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import './css/register.css';
 
+import { Link} from 'react-router-dom'
+
+
+
+import 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+
+
+
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAtbyENrTnzUS3BC2yqads9GRWT3fIyLiA",
+  authDomain: "capstone2-f5acb.firebaseapp.com",
+  databaseURL: "https://capstone2-f5acb-default-rtdb.firebaseio.com",
+  projectId: "capstone2-f5acb",
+  storageBucket: "capstone2-f5acb.appspot.com",
+  messagingSenderId: "578810233758",
+  appId: "1:578810233758:web:a3a5e23d4345da5e0b8c8f",
+  measurementId: "G-Z8V6JJ3ZWQ"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
+
 const Register = () => {
 
-  //Defining a state for the form
-  const[form, setForm] = useState({
-    password_two: {
-      pattern: '',
-    },
-  });
+
+  //Handles the registration, code for the button click
+  const handleRegistration = async (e) => {
+    e.preventDefault() // to stop the default form submission behavior
+
+    console.log('Form Elements:', e.target);
+
+    //Notes: Destructures, javascript feature, extracts values from arrays, and assign them to variables.
+    const {first_name, last_name, email, password, password_two } = e.target.elements;
+
+    //Extract values from the form element, ("?" - handles potential 'null' or 'undefined' values)
+    const firstName = first_name?.value;
+    const lastName = last_name?.value;
+    const userEmail = email?.value;
+    const userPassword = password?.value;
+
+    //Checks to see if the email or password is missing
+    if (!userEmail || !userPassword) {
+      console.error('Invalid form data');
+      return;
+    }
+
+    try {
+      //Registers the user with firebase authentication
+      await createUserWithEmailAndPassword(auth,userEmail,userPassword);
+      console.log('Registration Successful');
+
+      // redirects them to login page after success
+      window.location.href = '/login.jsx';
+    } catch (error) {
+      console.error('Registration Error', error.message);
+    }
+  }
 
   return (
     <>
@@ -45,19 +98,19 @@ const Register = () => {
             </div>
             <div className="right-side">
               <div className="wrapper">
-                <form className="box" action="">
+                <form className="box" action="" onSubmit={handleRegistration}>
                   <h1>Register</h1>
                   <div className="input-box">
                     <h3>First Name</h3>
-                    <input type="text" placeholder="First Name" required />
+                    <input type="text" name="first_name" placeholder="First Name" required />
                   </div>
                   <div className="input-box">
                     <h3>Last Name</h3>
-                    <input type="text" placeholder="Last Name" required />
+                    <input type="text" name="last_name" placeholder="Last Name" required />
                   </div>
                   <div className="input-box">
                     <h3>Email</h3>
-                    <input type="text" placeholder="Email" required />
+                    <input type="text" name="email" placeholder="Email" required />
                   </div>
                   <div className="input-box">
                     <h3>Password</h3>
@@ -65,19 +118,6 @@ const Register = () => {
                       type="password"
                       id="password"
                       name="password"
-                      pattern="^\S{6,}$"
-                      onChange={(e) => {
-                        e.target.setCustomValidity(
-                          e.target.validity.patternMismatch ? 'Must have at least 6 characters' : ''
-                        );
-                        if (e.target.checkValidity()) form.password_two.pattern = e.target.value;
-
-                        // updates the form state
-                        setForm((prevForm => ({
-                          ...prevForm,
-                          password_two: { pattern: e.target.value },
-                        })));
-                      }}
                       placeholder="Password"
                       required
                     />
@@ -87,12 +127,7 @@ const Register = () => {
                     <input
                       type="password"
                       id="password_two"
-                      pattern="^\S{6,}$"
-                      onChange={(e) => {
-                        e.target.setCustomValidity(
-                          e.target.validity.patternMismatch ? 'Please enter the same Password as above' : ''
-                        );
-                      }}
+                      name="password_two"
                       placeholder="Confirm Password"
                       required
                     />
@@ -101,7 +136,9 @@ const Register = () => {
                     Register
                   </button>
                   <div className="login-link">
-                    <a href="/login.jsx">Login</a>
+                    <p>
+                    Already have an account? <Link to="/login.jsx">Login</Link>
+                    </p>
                   </div>
                 </form>
               </div>
