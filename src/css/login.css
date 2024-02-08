@@ -751,4 +751,23 @@ padding: 20px 45px 20px 20px;
     text-decoration: underline;
 }
 
+/* start of Logged In user Styles */
 
+.menu-item {
+    font-size: 16px;
+    display: flex;
+    justify-content: left;
+    transition: color 0.5s; 
+  }
+  
+  .menu-item:hover {
+    color: rgb(223, 186, 36);
+  }
+  
+  .LoggedIn{
+    margin-right: 16px;
+  }
+
+  .LoggedIn:hover{
+    color: rgb(223, 186, 36);
+  }

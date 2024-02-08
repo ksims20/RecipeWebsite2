@@ -1,11 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import CommonLayout from './RecipeLayout'; 
+import './css/pick.css'; 
+import { Drawer } from 'antd';
 
 const baseURL = "https://www.themealdb.com/api/json/v2/1/";
 
 const Dessert = () => {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  // Displays the recipe info once the drawer is opened, fetches it from the API endpoint
+  const showDrawer = async (recipe) => {
+    try {
+      const response = await fetch(`${baseURL}lookup.php?i=${recipe.idMeal}`);
+      const data = await response.json();
+      const detailedRecipe = data.meals[0];
+      setSelectedRecipe(detailedRecipe);
+      setDrawerVisible(true);
+    } catch (error) {
+      console.error("Error fetching detailed recipe data:", error);
+    }
+  };
+
+  // Closes the drawer
+  const onCloseDrawer = () => {
+    setSelectedRecipe(null);
+    setDrawerVisible(false);
+  };
+
 
   const fetchRecipesByCategory = async (category) => {
     const url = `${baseURL}filter.php?c=${category}`;
@@ -27,24 +50,18 @@ const Dessert = () => {
     }
   };
 
-  const showRecipeData = async (recipeId, category) => {
-    const url = `${baseURL}lookup.php?i=${recipeId}`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      const meal = data.meals[0];
-
-      // Update the state to store the selected recipe
-      setSelectedRecipe(meal);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+      //Recipe as param, loops through 20 times, to get the recipes
+  //If the ingridentkey has a value, constructs string, pushes it to array
+  const getIngredients = (recipe) => {
+    let ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+      const ingredientKey = `strIngredient${i}`;
+      const measureKey = `strMeasure${i}`;
+      if (recipe[ingredientKey]) {
+        ingredients.push(`${recipe[ingredientKey]} - ${recipe[measureKey]}`);
+      }
     }
-  };
-
-  const goBackToResults = (category) => {
-    // Fetch recipes again and display results
-    fetchRecipesByCategory(category);
+    return ingredients;
   };
 
   const searchForRecipes = async (event, category) => {
@@ -80,11 +97,14 @@ const Dessert = () => {
   }, []);
 
   return (
-    <CommonLayout title="Dessert" activeTab="dessert">
-      <form onSubmit={(event) => searchForRecipes(event, 'dessert')}>
-        <label htmlFor="term">Search Term:</label>
-        <input id="term" type="text" placeholder="Enter a search term..." />
-        <button type="submit">Search</button>
+    <CommonLayout title="dessert" activeTab="dessert">
+      <form
+        className="meal-form"
+        onSubmit={(event) => searchForRecipes(event, "dessert")}
+      >
+        <label htmlFor="term">Search:</label>
+        <input id="term" type="text" placeholder="Search for a recipe" />
+        <button class="SearchButton" type="submit">Search</button>
       </form>
 
       <div id="dessert-results" className="results-container">
@@ -92,20 +112,42 @@ const Dessert = () => {
           <section key={recipe.idMeal}>
             <img src={recipe.strMealThumb} alt={recipe.strMeal} />
             <p>{recipe.strMeal}</p>
-            <button onClick={() => showRecipeData(recipe.idMeal, 'dessert')}>Show more</button>
+            <button class="SearchButton" onClick={() => showDrawer(recipe)}>Show more</button>
           </section>
         ))}
       </div>
 
-      {/* Display detailed recipe information */}
-      {selectedRecipe && (
-        <div className="detailed-recipe">
-          {/* Render detailed information here */}
-          <h2>{selectedRecipe.strMeal}</h2>
-          <p>{selectedRecipe.strInstructions}</p>
-          {/* You can add more details as needed */}
-        </div>
-      )}
+      <Drawer
+      //Renders the recipes name
+        title={selectedRecipe ? <b><span style={{ fontSize: "18px"}}> {selectedRecipe.strMeal} </span> </b>: ""}
+        placement="right"
+        onClose={onCloseDrawer}
+        visible={drawerVisible}
+        width={600}
+      >
+        {selectedRecipe && (
+          <div className="detailed-recipe">
+            <img
+              src={selectedRecipe.strMealThumb}
+              alt={selectedRecipe.strMeal}
+              style={{ maxWidth: "100%", maxHeight: "300px" }}
+            />
+            <h3>{selectedRecipe.strMeal}</h3>
+            <h4 style={{ fontSize: "18px", paddingTop: "10px"}}>Instructions:</h4>
+            <p style={{ fontSize: "16px", paddingTop: "10px", paddingBottom: "15px" }}>
+              {selectedRecipe.strInstructions}
+            </p>
+            <h4 style={{ fontSize: "18px", paddingBottom: "15px" }}>
+              Ingredients:
+            </h4>
+            <ul style={{ fontSize: "16px" }}>
+              {getIngredients(selectedRecipe).map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </Drawer>
     </CommonLayout>
   );
 };

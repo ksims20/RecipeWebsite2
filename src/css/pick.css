@@ -194,9 +194,7 @@ section{
     
 }
 
-
-
-form {
+.meal-form {
     padding-left: 150px;
     padding-top: 20px;
     padding-right: 20px;
@@ -209,21 +207,22 @@ form {
     margin-left: 50px;
 }
 
-label,
+
+.meal-form label,
 input,
 button {
     font-size: 1.1em;
     line-height: 1.6em;
 }
 
-label {
+.meal-form label {
     text-align: right;
     font-weight: bold;
 
     
 }
 
-input {
+.meal-form input {
     border: solid 1px #CCC;
     border-radius: 4px;
     padding-left: 150px;  
@@ -232,9 +231,9 @@ input {
     
 }
 
-button {
+button, .results-container button {
     padding: 6px 12px;
-    border-radius: 4px;
+    border-radius: 15px;
     border: solid 1px #FFF;
     background-color: black;
     color: white;
@@ -248,11 +247,17 @@ button:hover {
     font-weight: 600;
 }
 
-
-
-
-
-
-
-
-
+@media screen and (max-width:900px){
+    .meal-form{
+        /* grid-template-columns: repeat(4,1fr);   */
+        margin:0 20px; 
+        padding: 10px; 
+    }
+    .results-container{
+        grid-template-columns: repeat(2,1fr);  
+        margin:0 20px;  
+    }
+    button{
+        max-width: 80px;
+    }
+}

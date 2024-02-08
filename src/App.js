@@ -34,6 +34,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+//Use context hook, or param 
+
+
 const App = () => {
   return (
     <Router>

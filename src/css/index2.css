@@ -35,22 +35,19 @@ body{
     color: rgb(223, 186, 36);
 }
 
-#header{
-    /* display:flex;
-    justify-content: left;
-    align-items:normal;
-    margin-right: auto;
-    padding-left: 15px; */
 
+.Cookly{
     display:flex;
     justify-content: center;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    
     font-family: 'Cookie';
-    /* color: #FF8552; */
-    
+}
+
+.UserInfo{
+   padding-right: 10px;
+   
 }
 
 .about{
@@ -73,7 +70,6 @@ body{
     padding-right: 50px;
     padding-bottom: 8px;
     background: #F0F6F6;
-    
     margin-left: auto;
     margin-right: auto;
 }
@@ -104,7 +100,6 @@ a{
     font-weight: 600;
     margin-bottom: 25px; 
     margin-right: auto; 
-    font-weight: 600;
     font-size: 30px;
 
 }
@@ -121,19 +116,30 @@ img{
     justify-content: center;
     column-gap: 30px;
     grid-template-columns: repeat(4,1fr);
-    max-width: 700px;
+    max-width: 1500px;
 }
 
-.color a{
-    width: 100%;
+.color p{
+    text-align: center;
+    margin-top: 10px;
 }
 
 .color img{
-    width: 100%;
-    height: 400px;
     object-fit: cover;
     border-radius: 2%;
-    overflow:visible;
+    width: 100%;
+    height: 450px;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -webkit-transition: all 2s ease;
+}
+
+.color img:hover{
+    filter: grayscale(0%);
+    filter: gray;
+    -webkit-filter: grayscale(0%);
+    filter: none;
+    transition: 2s ease;
 }
 
 /* Start of images on homepage */
@@ -144,64 +150,31 @@ img{
     margin-right: auto;
 }
 
-/* .One{
-    margin-right: 15px;
-} */
-/* .Two{
-    margin-right: 15px;
-}
+/* start of Logged In user Styles */
 
-.Three{
-    margin-right: 15px;
-}
-.Four{
-    margin-right: 15px;
-} */
-
-.Desc{
-    list-style: none;
-    padding-top:7px;
-    font-size:16px;
-}
-
-.Space1{
-    padding-left: 100px;
-}
-
-.Space2{
-    padding-left: 253px;
-}
-
-.Space3{
-    padding-left: 276px;
-}
-
-.Space4{
-    padding-left: 276px;
-}
-
-.color img{
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
-    -webkit-transition: all 2s ease;
-    }
-    
-.color img:hover{
-    filter: grayscale(0%);
-    filter: gray;
-    -webkit-filter: grayscale(0%);
-    filter: none;
-    transition: 2s ease;
-}
-
-.Descriptions{
-    margin-left: auto;
-    margin-right: 100px;
+.menu-item {
+    font-size: 16px;
     display: flex;
-    justify-content:center;
-    
+    justify-content: left;
+    transition: color 0.5s; 
+    font-weight: 600;
+  }
+  
+  .menu-item:hover {
+    color: rgb(223, 186, 36);
+  }
+  
+  .LoggedIn{
+    margin-right: 16px;
+  }
+
+  .LoggedIn:hover{
+    color: rgb(223, 186, 36);
+  }
+
+@media screen and (max-width:900px){
+    .color{
+        grid-template-columns: repeat(2,1fr);  
+        margin:0 20px;  
+    }
 }
-
-
-
-
