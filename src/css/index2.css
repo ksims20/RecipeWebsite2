@@ -159,6 +159,11 @@ img{
     transition: color 0.5s; 
     font-weight: 600;
   }
+
+  .Welcome{
+    font-size: 12px;
+    font-weight: 600;
+  }
   
   .menu-item:hover {
     color: rgb(223, 186, 36);
@@ -169,6 +174,10 @@ img{
   }
 
   .LoggedIn:hover{
+    color: rgb(223, 186, 36);
+  }
+
+ #favorite-hover:hover{
     color: rgb(223, 186, 36);
   }
 

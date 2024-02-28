@@ -9,6 +9,7 @@ import Lunch from './lunch.jsx';
 import Dinner from './dinner.jsx';
 import Dessert from './dessert.jsx';
 import CommonLayout from './RecipeLayout.jsx';
+import Favorites from './Favs.jsx';
 import './css/index2.css';
 
 // Import the functions you need from the SDKs you need
@@ -34,8 +35,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-//Use context hook, or param 
-
 
 const App = () => {
   return (
@@ -50,6 +49,7 @@ const App = () => {
         <Route path="/dinner.jsx" element={<Dinner />} />
         <Route path="/dessert.jsx" element={<Dessert />} />
         <Route path="/RecipeLayout.jsx" element={<CommonLayout />} />
+        <Route path="/Favs.jsx" element={<Favorites />} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>

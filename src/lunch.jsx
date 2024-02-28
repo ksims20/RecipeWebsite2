@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import CommonLayout from './RecipeLayout';
-import './css/pick.css'; 
-import { Drawer } from 'antd';
+import React, { useEffect, useState } from "react";
+import CommonLayout from "./RecipeLayout";
+import "./css/pick.css";
+import { Drawer } from "antd";
+import { StarOutlined, StarFilled } from "@ant-design/icons";
 
 const baseURL = "https://www.themealdb.com/api/json/v2/1/";
 
-const Lunch = () => {
+const Lunch = ({ isLoggedIn }) => {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+
+  const toggleFavorite = (recipe) => {
+    if (favorites.includes(recipe.idMeal)) {
+      setFavorites(favorites.filter((id) => id !== recipe.idMeal));
+    } else {
+      setFavorites([...favorites, recipe.idMeal]);
+    }
+  };
+
+  const isFavorite = (recipe) => favorites.includes(recipe.idMeal);
 
   // Displays the recipe info once the drawer is opened, fetches it from the API endpoint
   const showDrawer = async (recipe) => {
@@ -16,7 +28,12 @@ const Lunch = () => {
       const response = await fetch(`${baseURL}lookup.php?i=${recipe.idMeal}`);
       const data = await response.json();
       const detailedRecipe = data.meals[0];
-      setSelectedRecipe(detailedRecipe);
+
+      //Splits the instructions up
+      const instructions = detailedRecipe.strInstructions.split("\n");
+      //Note to self, the "..." creates new objects and copies all the key-value pairs, and then adds a new key-value pair
+      //Specifically, all key-value pairs in detailedRecipe are copied to instructions
+      setSelectedRecipe({ ...detailedRecipe, instructions });
       setDrawerVisible(true);
     } catch (error) {
       console.error("Error fetching detailed recipe data:", error);
@@ -49,7 +66,7 @@ const Lunch = () => {
     }
   };
 
-     //Recipe as param, loops through 20 times, to get the recipes
+  //Recipe as param, loops through 20 times, to get the recipes
   //If the ingridentkey has a value, constructs string, pushes it to array
   const getIngredients = (recipe) => {
     let ingredients = [];
@@ -96,14 +113,16 @@ const Lunch = () => {
   }, []);
 
   return (
-    <CommonLayout title="lunch" activeTab="lunch">
+    <CommonLayout title="lunch" activeTab="lunch" isLoggedIn={isLoggedIn}>
       <form
         className="meal-form"
         onSubmit={(event) => searchForRecipes(event, "lunch")}
       >
         <label htmlFor="term">Search:</label>
         <input id="term" type="text" placeholder="Search for a recipe" />
-        <button class="SearchButton" type="submit">Search</button>
+        <button class="SearchButton" type="submit">
+          Search
+        </button>
       </form>
 
       <div id="lunch-results" className="results-container">
@@ -111,14 +130,36 @@ const Lunch = () => {
           <section key={recipe.idMeal}>
             <img src={recipe.strMealThumb} alt={recipe.strMeal} />
             <p>{recipe.strMeal}</p>
-            <button class="SearchButton" onClick={() => showDrawer(recipe)}>Show more</button>
+            <button class="SearchButton" onClick={() => showDrawer(recipe)}>
+              Show more
+            </button>
+            <button id="FavoriteButton" onClick={() => toggleFavorite(recipe)}>
+              {isFavorite(recipe) ? (
+                <StarFilled style={{ fontSize: "24px", paddingLeft: "5px" }} />
+              ) : (
+                <StarOutlined
+                  style={{ fontSize: "24px", paddingLeft: "5px" }}
+                />
+              )}
+            </button>
           </section>
         ))}
       </div>
 
       <Drawer
-      //Renders the recipes name
-        title={selectedRecipe ? <b><span style={{ fontSize: "18px"}}> {selectedRecipe.strMeal} </span> </b>: ""}
+        //Renders the recipes name
+        title={
+          selectedRecipe ? (
+            <b>
+              <span style={{ fontSize: "18px" }}>
+                {" "}
+                {selectedRecipe.strMeal}{" "}
+              </span>{" "}
+            </b>
+          ) : (
+            ""
+          )
+        }
         placement="right"
         onClose={onCloseDrawer}
         visible={drawerVisible}
@@ -132,14 +173,29 @@ const Lunch = () => {
               style={{ maxWidth: "100%", maxHeight: "300px" }}
             />
             <h3>{selectedRecipe.strMeal}</h3>
-            <h4 style={{ fontSize: "18px", paddingTop: "10px"}}>Instructions:</h4>
-            <p style={{ fontSize: "16px", paddingTop: "10px", paddingBottom: "15px" }}>
-              {selectedRecipe.strInstructions}
-            </p>
+            <h4 style={{ fontSize: "18px", paddingTop: "10px" }}>
+              {" "}
+              Instructions:{" "}
+            </h4>
+            <ul
+              style={{
+                fontSize: "16px",
+                listStyleType: "disc",
+                paddingLeft: "20px",
+              }}
+            >
+              {selectedRecipe.instructions
+                //Some steps were showing random empty bullet points, added filter to get rid of that
+                .filter((step) => step.trim() !== "")
+                .map((step, index) => (
+                  <li key={index}>{step}</li>
+                ))}
+            </ul>
+
             <h4 style={{ fontSize: "18px", paddingBottom: "15px" }}>
               Ingredients:
             </h4>
-            <ul style={{ fontSize: "16px" }}>
+            <ul style={{ fontSize: "16px", paddingLeft: "20px" }}>
               {getIngredients(selectedRecipe).map((ingredient, index) => (
                 <li key={index}>{ingredient}</li>
               ))}

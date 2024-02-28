@@ -14,6 +14,7 @@ import { database, set } from "./firebase.js"; //imports firebase
 const CommonLayout = ({ title, activeTab, children }) => {
   const [userFirstName, setUserFirstName] = useState('');
   const [userLastName, setUserLastName] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -25,11 +26,13 @@ const CommonLayout = ({ title, activeTab, children }) => {
           const userData = snapshot.val();
           setUserFirstName(userData.firstName);
           setUserLastName(userData.lastName);
+          setIsLoggedIn(true);
           console.log('User:', userData.firstName, userData.lastName, ' is signed in.');
         });
       } else {
         setUserFirstName('');
         setUserLastName('');
+        setIsLoggedIn(false);
         console.log('No User is signed in');
       }
     });
@@ -44,20 +47,23 @@ return (
     <div className="TopMenu">
       <a href="/about.jsx" className="about">About</a>
       <h1 id="header"> <b>{title}</b> </h1>
-      <b><UserInfoPop firstName={userFirstName} lastName={userLastName} /> </b>
         <li className={activeTab === 'home' ? 'A selected' : 'A'}>
           <a className="house" href="/"> <IonIcon icon={homeOutline}></IonIcon> </a>
         </li>
-        <li className={activeTab === 'person' ? 'B selected' : 'B'}>
-          <a className="Person" href="/login.jsx"> <IonIcon icon={personOutline}></IonIcon> </a>
-        </li>
+        <li className="B">
+        <b> <UserInfoPop firstName={userFirstName} lastName={userLastName} /> </b>
+          {!isLoggedIn && (
+            <a className="Person" href="login.jsx">
+              <IonIcon icon={personOutline}></IonIcon>
+            </a>
+          )}
+          </li>
     </div>
     <div className="sidebar">
       <ul>
         <li><a href="/breakfast.jsx">Breakfast<IonIcon icon={eggOutline}></IonIcon></a></li>
         <li><a href="/lunch.jsx">Lunch<IonIcon icon={pizzaOutline}></IonIcon></a></li>
         <li><a href="/dinner.jsx">Dinner<IonIcon icon={fastFoodOutline}></IonIcon></a></li>
-        {/* Testing active links */}
         <li><a className={activeTab === 'dessert' ? 'selected' : ''} href="/dessert.jsx">Dessert<IonIcon icon={beerOutline}></IonIcon></a></li>
       </ul>
     </div>

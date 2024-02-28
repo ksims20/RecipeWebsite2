@@ -110,12 +110,6 @@ const Login = () => {
         </h1>
 
         <li className="A">
-          <b>
-            {" "}
-            {userFirstName && userLastName && (
-              <UserInfoPop firstName={userFirstName} lastName={userLastName} />
-            )}{" "}
-          </b>
           <a className="house" href="/">
             <IonIcon icon={homeOutline}></IonIcon>
           </a>

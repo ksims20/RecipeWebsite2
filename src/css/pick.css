@@ -86,10 +86,6 @@ ul li:hover a{
 
 }
 
-
-
-
-
 .house{
     font-size: 22px;
 }
@@ -231,6 +227,15 @@ button {
     
 }
 
+button, .SearchButton{
+    background-color: black;
+    color:white;
+}
+button, .SerachButton:hover{
+    color: rgb(223, 186, 36);
+    font-weight: 600;
+}
+
 button, .results-container button {
     padding: 6px 12px;
     border-radius: 15px;
@@ -244,6 +249,18 @@ button, .results-container button {
 button:hover {
     color: rgb(223, 186, 36);
     border: solid 1px #CCC;
+    font-weight: 600;
+}
+
+button, #FavoriteButton{
+    background-color: #F0F6F6;
+    border-style: none;
+    color:black;
+}
+
+button, #FavoriteButton:hover{
+    color: rgb(223, 186, 36);
+    border-style: none;
     font-weight: 600;
 }
 

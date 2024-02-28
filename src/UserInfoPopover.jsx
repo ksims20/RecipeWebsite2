@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Popover } from "antd";
-import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
+import { homeOutline, personOutline } from "ionicons/icons";
+import { IonIcon } from "@ionic/react";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 const UserInfoPop = ({ firstName, lastName }) => {
   //Tracks if the user is logged in
@@ -8,9 +10,9 @@ const UserInfoPop = ({ firstName, lastName }) => {
 
   useEffect(() => {
     const auth = getAuth();
-    
-  // Check if user is logged in
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
+
+    // Check if user is logged in
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoggedIn(true); // User is logged in
       } else {
@@ -19,7 +21,7 @@ const UserInfoPop = ({ firstName, lastName }) => {
     });
 
     return () => {
-      unsubscribe(); 
+      unsubscribe();
     };
   }, []);
 
@@ -32,33 +34,46 @@ const UserInfoPop = ({ firstName, lastName }) => {
       })
       .catch((error) => {
         // Handle logout error
-        console.error('Error logging out:', error);
+        console.error("Error logging out:", error);
       });
   };
 
   const content = (
     <div>
       <p className="menu-item">
-                                    {/* Make changes here once you add a favorites menu */}
-        Favorites
+        <a id="favorite-hover" href="Favs.jsx">
+          Favorites
+        </a>
       </p>
-      <p className="menu-item" onClick={handleLogout}>Log out</p>
+      <p className="menu-item" onClick={handleLogout}>
+        Log out
+      </p>
     </div>
   );
 
+  const popOverTitle = (
+    <span className="LoggedIn">
+          Welcome, {firstName} {lastName} !
+        </span>
+  )
+
   return (
-    //Now will only render in the Popover if the user is loggedIn
+    //Only renders in the Popover if the user is loggedIn
     LoggedIn && (
-    <Popover
-      placement="bottom"
-      title="Options"
-      content={content}
-      overlayStyle={{ maxWidth: "200px", maxHeight: "50px", fontSize: "14px"}}
-    >
-      <span className="LoggedIn">
-        Welcome, {firstName} {lastName} !
-      </span>
-    </Popover>
+      <Popover
+        placement="bottom"
+        title={popOverTitle}
+        content={content}
+        overlayStyle={{
+          maxWidth: "220px",
+          maxHeight: "50px",
+          fontSize: "14px",
+        }}
+      >
+        <span className="LoggedIn" style={{ fontSize: "22px" }}>
+          <IonIcon icon={personOutline} />
+        </span>
+      </Popover>
     )
   );
 };

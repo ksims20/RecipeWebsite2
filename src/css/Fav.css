@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Varela Round', sans-serif;
+    background: #F0F6F6;
+    color: black;
+}
+
+
+.house{
+    font-size: 22px;
+    transition: .4s;
+}
+.house:hover{
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgb(223, 186, 36);
+}
+
+.Person{
+    font-size: 22px;
+    transition: .4s;
+}
+.Person:hover{
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgb(223, 186, 36);
+}
+
+.UserInfo{
+    padding-right: 10px;
+    
+ }
+ 
+ .about{
+     text-decoration: none;
+     margin-top: auto;
+     margin-bottom: auto;
+     padding-left: 20px;
+     padding-top: 2px;
+     transition: .4s;
+ }
+ .about:hover{
+     padding-left: 30px;
+     color: rgb(223, 186, 36);
+ }
+ 
+ .TopMenu{
+     display: flex;
+     align-items: center; 
+     justify-content: right;
+     padding-right: 50px;
+     padding-bottom: 8px;
+     background: #F0F6F6;
+     margin-left: auto;
+     margin-right: auto;
+ }
+ 
+ .TopMenu li{
+     list-style: none;
+     align-items: right;
+     justify-content: right;
+     padding-left: 14px;
+     padding-top: 10px;
+     padding-right: 0px;
+ 
+ }
+ a{
+     color:black;
+ }
+
+ /* start of Logged In user Styles */
+
+.menu-item {
+    font-size: 16px;
+    display: flex;
+    justify-content: left;
+    transition: color 0.5s; 
+    font-weight: 600;
+  }
+  
+  .menu-item:hover {
+    color: rgb(223, 186, 36);
+  }
+  
+  .LoggedIn{
+    margin-right: 16px;
+  }
+
+  .LoggedIn:hover{
+    color: rgb(223, 186, 36);
+  }
+
+@media screen and (max-width:900px){
+    .color{
+        grid-template-columns: repeat(2,1fr);  
+        margin:0 20px;  
+    }
+}
