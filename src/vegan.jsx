@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import CommonLayout from './RecipeLayout'; 
-import './css/pick.css'; 
-import { Drawer } from 'antd';
+import React, { useEffect, useState } from "react";
+import CommonLayout from "./RecipeLayout";
+import "./css/pick.css";
+import { Drawer } from "antd";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
 
 const baseURL = "https://www.themealdb.com/api/json/v2/1/";
 
-const Dessert = ({ isLoggedIn }) => {
+const Vegan = ({ isLoggedIn }) => {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [favorites, setFavorites] = useState([]); 
+  const [favorites, setFavorites] = useState([]);
 
   const toggleFavorite = (recipe) => {
-    if (favorites.includes(recipe.idMeal)){
-      setFavorites(favorites.filter(id => id !== recipe.idMeal));
+    if (favorites.includes(recipe.idMeal)) {
+      setFavorites(favorites.filter((id) => id !== recipe.idMeal));
     } else {
       setFavorites([...favorites, recipe.idMeal]);
     }
@@ -46,7 +46,6 @@ const Dessert = ({ isLoggedIn }) => {
     setDrawerVisible(false);
   };
 
-
   const fetchRecipesByCategory = async (category) => {
     const url = `${baseURL}filter.php?c=${category}`;
 
@@ -67,7 +66,7 @@ const Dessert = ({ isLoggedIn }) => {
     }
   };
 
-      //Recipe as param, loops through 20 times, to get the recipes
+  //Recipe as param, loops through 20 times, to get the recipes
   //If the ingridentkey has a value, constructs string, pushes it to array
   const getIngredients = (recipe) => {
     let ingredients = [];
@@ -109,46 +108,86 @@ const Dessert = ({ isLoggedIn }) => {
   };
 
   useEffect(() => {
-    // Fetch recipes for dessert when the component mounts
-    fetchRecipesByCategory("dessert");
+    // Fetches recipes for lunch when the component mounts
+    fetchRecipesByCategory("vegan");
+
+    //Fetches recipes from the Miscellaneous, Side, and Starter categories
+    const fetchLunchRecipes = async () => {
+        try {
+          // Vegan 
+          const responseVegan = await fetch(`${baseURL}filter.php?c=Vegan`);
+          const dataVegan = await responseVegan.json();
+    
+          //Vegetarian
+          const responseVegetarian = await fetch(`${baseURL}filter.php?c=Vegetarian`);
+          const dataVegetarian = await responseVegetarian.json();
+
+          // Combine recipes from all categories into one array
+          const allRecipes = [...dataVegan.meals, ...dataVegetarian.meals];
+    
+          // Set the combined recipes as the state
+          setRecipes(allRecipes);
+        } catch (error) {
+          console.error("Error fetching Vegan/Vegetarian recipes:", error);
+        }
+      };
+        fetchLunchRecipes();
   }, []);
 
   return (
-    <CommonLayout title="dessert" activeTab="dessert" isLoggedIn={isLoggedIn}>
+    <CommonLayout title="vegan" activeTab="vegan" isLoggedIn={isLoggedIn}>
       <form
         className="meal-form"
-        onSubmit={(event) => searchForRecipes(event, "dessert")}
+        onSubmit={(event) => searchForRecipes(event, "vegan")}
       >
         <label htmlFor="term">Search:</label>
         <input id="term" type="text" placeholder="Search for a recipe" />
-        <button class="SearchButton" type="submit">Search</button>
+        <button class="SearchButton" type="submit">
+          Search
+        </button>
       </form>
 
-      <div id="dessert-results" className="results-container">
+      <div id="vegan-results" className="results-container">
         {recipes.map((recipe) => (
           <section key={recipe.idMeal}>
             <img src={recipe.strMealThumb} alt={recipe.strMeal} />
             <p>{recipe.strMeal}</p>
-            <button class="SearchButton" onClick={() => showDrawer(recipe)}>Show more</button>
+            <button class="SearchButton" onClick={() => showDrawer(recipe)}>
+              Show more
+            </button>
             <button id="FavoriteButton" onClick={() => toggleFavorite(recipe)}>
-              {isFavorite(recipe) ?
-              <StarFilled style={{ fontSize: "24px", paddingLeft: "5px"}} /> :
-              <StarOutlined style={{ fontSize: "24px", paddingLeft: "5px" }} /> 
-              }
+              {isFavorite(recipe) ? (
+                <StarFilled style={{ fontSize: "24px", paddingLeft: "5px" }} />
+              ) : (
+                <StarOutlined
+                  style={{ fontSize: "24px", paddingLeft: "5px" }}
+                />
+              )}
             </button>
           </section>
         ))}
       </div>
 
       <Drawer
-      //Renders the recipes name
-        title={selectedRecipe ? <b><span style={{ fontSize: "18px"}}> {selectedRecipe.strMeal} </span> </b>: ""}
+        //Renders the recipes name
+        title={
+          selectedRecipe ? (
+            <b>
+              <span style={{ fontSize: "18px" }}>
+                {" "}
+                {selectedRecipe.strMeal}{" "}
+              </span>{" "}
+            </b>
+          ) : (
+            ""
+          )
+        }
         placement="right"
         onClose={onCloseDrawer}
         visible={drawerVisible}
         width={1000}
       >
-         {selectedRecipe && (
+        {selectedRecipe && (
           <div className="detailed-recipe">
             <img
               src={selectedRecipe.strMealThumb}
@@ -156,16 +195,25 @@ const Dessert = ({ isLoggedIn }) => {
               style={{ maxWidth: "100%", maxHeight: "300px" }}
             />
             <h3>{selectedRecipe.strMeal}</h3>
-            <h4 style={{ fontSize: "18px", paddingTop: "10px" }}>  Instructions: </h4>
-            <ul style={{fontSize:"16px", listStyleType: "disc", paddingLeft:"20px"}}>
-            {selectedRecipe.instructions
-            //Some steps were showing random empty bullet points, added filter to get rid of that
-            .filter((step) => step.trim() !== "")
-            .map((step, index) => (
-              <li key={index}>{step}</li>
-            ))}
+            <h4 style={{ fontSize: "18px", paddingTop: "10px" }}>
+              {" "}
+              Instructions:{" "}
+            </h4>
+            <ul
+              style={{
+                fontSize: "16px",
+                listStyleType: "disc",
+                paddingLeft: "20px",
+              }}
+            >
+              {selectedRecipe.instructions
+                //Some steps were showing random empty bullet points, added filter to get rid of that
+                .filter((step) => step.trim() !== "")
+                .map((step, index) => (
+                  <li key={index}>{step}</li>
+                ))}
             </ul>
-            
+
             <h4 style={{ fontSize: "18px", paddingBottom: "15px" }}>
               Ingredients:
             </h4>
@@ -181,4 +229,4 @@ const Dessert = ({ isLoggedIn }) => {
   );
 };
 
-export default Dessert;
+export default Vegan;

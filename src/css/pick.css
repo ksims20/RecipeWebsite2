@@ -58,7 +58,7 @@ a{
 .sidebar{
     position: fixed;
     left: 0px;
-    width: 200px;
+    width: 255px;
     height: 100%;
     background: #F0F6F6;
 }
@@ -190,6 +190,13 @@ section{
     
 }
 
+#vegan-results img {
+    max-width: 50%;
+    border-radius: 2%;
+    object-fit: cover;
+    
+}
+
 .meal-form {
     padding-left: 150px;
     padding-top: 20px;
@@ -262,6 +269,13 @@ button, #FavoriteButton:hover{
     color: rgb(223, 186, 36);
     border-style: none;
     font-weight: 600;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 @media screen and (max-width:900px){

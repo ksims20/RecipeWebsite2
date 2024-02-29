@@ -10,6 +10,7 @@ import Dinner from './dinner.jsx';
 import Dessert from './dessert.jsx';
 import CommonLayout from './RecipeLayout.jsx';
 import Favorites from './Favs.jsx';
+import Vegan from './vegan.jsx';
 import './css/index2.css';
 
 // Import the functions you need from the SDKs you need
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/lunch.jsx" element={<Lunch />} />
         <Route path="/dinner.jsx" element={<Dinner />} />
         <Route path="/dessert.jsx" element={<Dessert />} />
+        <Route path="/vegan.jsx" element={<Vegan />} />
         <Route path="/RecipeLayout.jsx" element={<CommonLayout />} />
         <Route path="/Favs.jsx" element={<Favorites />} />
         {/* Add other routes as needed */}

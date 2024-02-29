@@ -10,8 +10,11 @@ const Dinner = ({ isLoggedIn }) => {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
+  //keeps track of favorites
   const [favorites, setFavorites] = useState([]); 
 
+  // keeps track of pages? 
+  
   const toggleFavorite = (recipe) => {
     if (favorites.includes(recipe.idMeal)){
       setFavorites(favorites.filter(id => id !== recipe.idMeal));
@@ -107,9 +110,55 @@ const Dinner = ({ isLoggedIn }) => {
     }
   };
 
+  // Uses the same logic found in the Lunch.jsx file, just different categories
   useEffect(() => {
-    // Fetch recipes for dinner when the component mounts
     fetchRecipesByCategory("dinner");
+    // Fetches recipes for dinner when the component mounts
+    const fetchDinnerRecipes = async () => {
+      try{
+        // Beef
+        const responseBeef = await fetch(`${baseURL}filter.php?c=Beef`);
+        const dataBeef = await responseBeef.json();
+
+        // Chicken 
+        const responseChick = await fetch(`${baseURL}filter.php?c=Chicken`);
+        const dataChick = await responseChick.json();
+
+        // Lamb 
+        const responseLamb = await fetch(`${baseURL}filter.php?c=Lamb`);
+        const dataLamb = await responseLamb.json();
+
+        // Pasta 
+        const responsePasta = await fetch(`${baseURL}filter.php?c=Pasta`);
+        const dataPasta = await responsePasta.json();
+
+        // Pork 
+        const responsePork = await fetch(`${baseURL}filter.php?c=Pork`);
+        const dataPork = await responsePork.json();
+
+        // Seafood 
+        const responseSea = await fetch(`${baseURL}filter.php?c=Seafood`);
+        const dataSea = await responseSea.json();
+       
+        // Goat 
+        const responseGoat = await fetch(`${baseURL}filter.php?c=Goat`);
+        const dataGoat = await responseGoat.json();
+
+        const DinRecipes = [...dataBeef.meals, 
+          ...dataChick.meals, 
+          ...dataLamb.meals, 
+          ...dataPasta.meals, 
+          ... dataPork.meals,
+          ... dataSea.meals,
+          ... dataGoat.meals
+        ];
+
+        setRecipes(DinRecipes);
+      } catch(error){
+        console.error("Error fetching dinner recipes:", error);
+      }
+    };
+    fetchDinnerRecipes();
   }, []);
 
   return (

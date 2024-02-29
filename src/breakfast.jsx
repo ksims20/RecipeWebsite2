@@ -11,11 +11,11 @@ const Breakfast = () => {
   //Visibility of recipe, and drawer once page loads.
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [favorites, setFavorites] = useState([]); 
+  const [favorites, setFavorites] = useState([]);
 
   const toggleFavorite = (recipe) => {
-    if (favorites.includes(recipe.idMeal)){
-      setFavorites(favorites.filter(id => id !== recipe.idMeal));
+    if (favorites.includes(recipe.idMeal)) {
+      setFavorites(favorites.filter((id) => id !== recipe.idMeal));
     } else {
       setFavorites([...favorites, recipe.idMeal]);
     }
@@ -132,10 +132,13 @@ const Breakfast = () => {
               Show more
             </button>
             <button id="FavoriteButton" onClick={() => toggleFavorite(recipe)}>
-              {isFavorite(recipe) ?
-              <StarFilled style={{ fontSize: "24px", paddingLeft: "5px"}} /> :
-              <StarOutlined style={{ fontSize: "24px", paddingLeft: "5px" }} /> 
-              }
+              {isFavorite(recipe) ? (
+                <StarFilled style={{ fontSize: "24px", paddingLeft: "5px" }} />
+              ) : (
+                <StarOutlined
+                  style={{ fontSize: "24px", paddingLeft: "5px" }}
+                />
+              )}
             </button>
           </section>
         ))}
@@ -161,7 +164,7 @@ const Breakfast = () => {
         placement="right"
         onClose={onCloseDrawer}
         visible={drawerVisible}
-        width={600}
+        width={1000}
       >
         {selectedRecipe && (
           <div className="detailed-recipe">

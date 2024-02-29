@@ -108,8 +108,34 @@ const Lunch = ({ isLoggedIn }) => {
   };
 
   useEffect(() => {
-    // Fetch recipes for lunch when the component mounts
+    // Fetches recipes for lunch when the component mounts
     fetchRecipesByCategory("lunch");
+
+    //Fetches recipes from the Miscellaneous, Side, and Starter categories
+    const fetchLunchRecipes = async () => {
+        try {
+          // Miscellaneous 
+          const responseMisc = await fetch(`${baseURL}filter.php?c=Miscellaneous`);
+          const dataMisc = await responseMisc.json();
+    
+          //Side
+          const responseSide = await fetch(`${baseURL}filter.php?c=Side`);
+          const dataSide = await responseSide.json();
+    
+          //Starter
+          const responseStarter = await fetch(`${baseURL}filter.php?c=Starter`);
+          const dataStarter = await responseStarter.json();
+    
+          // Combine recipes from all categories into one array
+          const allRecipes = [...dataMisc.meals, ...dataSide.meals, ...dataStarter.meals];
+    
+          // Set the combined recipes as the state
+          setRecipes(allRecipes);
+        } catch (error) {
+          console.error("Error fetching lunch recipes:", error);
+        }
+      };
+        fetchLunchRecipes();
   }, []);
 
   return (
@@ -163,7 +189,7 @@ const Lunch = ({ isLoggedIn }) => {
         placement="right"
         onClose={onCloseDrawer}
         visible={drawerVisible}
-        width={600}
+        width={1000}
       >
         {selectedRecipe && (
           <div className="detailed-recipe">

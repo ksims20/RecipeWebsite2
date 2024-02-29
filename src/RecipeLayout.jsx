@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { IonIcon } from '@ionic/react';
-import { homeOutline, personOutline, eggOutline, pizzaOutline, fastFoodOutline, beerOutline } from 'ionicons/icons';
+import { homeOutline, personOutline, eggOutline, pizzaOutline, fastFoodOutline, beerOutline, flowerOutline } from 'ionicons/icons';
 import './css/pick.css'; 
 import UserInfoPop from "./UserInfoPopover.jsx";
 
@@ -61,10 +61,11 @@ return (
     </div>
     <div className="sidebar">
       <ul>
-        <li><a href="/breakfast.jsx">Breakfast<IonIcon icon={eggOutline}></IonIcon></a></li>
-        <li><a href="/lunch.jsx">Lunch<IonIcon icon={pizzaOutline}></IonIcon></a></li>
-        <li><a href="/dinner.jsx">Dinner<IonIcon icon={fastFoodOutline}></IonIcon></a></li>
+        <li><a className={activeTab === 'breakfast' ? 'selected' : ''} href="/breakfast.jsx">Breakfast<IonIcon icon={eggOutline}></IonIcon></a></li>
+        <li><a className={activeTab === 'lunch' ? 'selected' : ''} href="/lunch.jsx">Lunch<IonIcon icon={pizzaOutline}></IonIcon></a></li>
+        <li><a className={activeTab === 'dinner' ? 'selected' : ''}href="/dinner.jsx">Dinner<IonIcon icon={fastFoodOutline}></IonIcon></a></li>
         <li><a className={activeTab === 'dessert' ? 'selected' : ''} href="/dessert.jsx">Dessert<IonIcon icon={beerOutline}></IonIcon></a></li>
+        <li><a className={activeTab === 'vegan' ? 'selected' : ''} href="vegan.jsx">Vegan/Vegeterian<IonIcon icon={flowerOutline}></IonIcon></a></li>
       </ul>
     </div>
     {children}
