@@ -40,11 +40,19 @@ const Login = () => {
             userData.lastName,
             " is signed in."
           );
+
+            // set user info to local storage when user logs in
+            console.log("User", user);
+            localStorage.setItem("lastName", userData.lastName);
+            localStorage.setItem("firstName", userData.firstName);
+            localStorage.setItem("email", user.email);
+            localStorage.setItem("uid", user.uid);
         });
       } else {
         setUserFirstName("");
         setUserLastName("");
         console.log("No User is signed in");
+
       }
     });
     return () => {
@@ -67,6 +75,7 @@ const Login = () => {
           message: "Log in successful!",
           duration: 2, //in seconds
         });
+
 
         // Redirect to the home page after successful login with delay
         setTimeout(() => {

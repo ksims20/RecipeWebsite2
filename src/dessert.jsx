@@ -108,6 +108,22 @@ const Dessert = ({ isLoggedIn }) => {
     }
   };
 
+  function getFavoritesButton(recipe) {
+    if (localStorage.getItem("uid")) {
+        return (
+            <button id="FavoriteButton" onClick={() => toggleFavorite(recipe)}>
+              {isFavorite(recipe) ? (
+                <StarFilled style={{ fontSize: "24px", paddingLeft: "5px" }} />
+              ) : (
+                <StarOutlined
+                  style={{ fontSize: "24px", paddingLeft: "5px" }}
+                />
+              )}
+            </button>   
+        )
+    }
+  }
+
   useEffect(() => {
     // Fetch recipes for dessert when the component mounts
     fetchRecipesByCategory("dessert");
