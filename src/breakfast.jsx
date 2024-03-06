@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CommonLayout from "./RecipeLayout";
+import { getAuth } from "firebase/auth";
 import "./css/pick.css";
 import { Drawer } from "antd";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
@@ -14,9 +15,19 @@ const Breakfast = () => {
   const [favorites, setFavorites] = useState([]);
 
   const toggleFavorite = (recipe) => {
+    const uid = localStorage.getItem("uid");
+    
+    const jsonObj = {
+        "uid": uid,
+        "idMeal": recipe.idMeal,
+        "strMeal": recipe.strMeal,
+        "strMealThumb": recipe.strMealThumb,
+    }
     if (favorites.includes(recipe.idMeal)) {
+        console.log("remove from firebase:", jsonObj);
       setFavorites(favorites.filter((id) => id !== recipe.idMeal));
     } else {
+        console.log("add to firebase:", jsonObj);
       setFavorites([...favorites, recipe.idMeal]);
     }
   };
@@ -110,6 +121,24 @@ const Breakfast = () => {
     fetchRecipesByCategory("breakfast");
   }, []);
 
+  console.log(getAuth());
+
+  function getFavoritesButton(recipe) {
+    if (localStorage.getItem("uid")) {
+        return (
+            <button id="FavoriteButton" onClick={() => toggleFavorite(recipe)}>
+              {isFavorite(recipe) ? (
+                <StarFilled style={{ fontSize: "24px", paddingLeft: "5px" }} />
+              ) : (
+                <StarOutlined
+                  style={{ fontSize: "24px", paddingLeft: "5px" }}
+                />
+              )}
+            </button>   
+        )
+    }
+  }
+
   return (
     <CommonLayout title="Breakfast" activeTab="breakfast">
       <form
@@ -131,15 +160,8 @@ const Breakfast = () => {
             <button class="SearchButton" onClick={() => showDrawer(recipe)}>
               Show more
             </button>
-            <button id="FavoriteButton" onClick={() => toggleFavorite(recipe)}>
-              {isFavorite(recipe) ? (
-                <StarFilled style={{ fontSize: "24px", paddingLeft: "5px" }} />
-              ) : (
-                <StarOutlined
-                  style={{ fontSize: "24px", paddingLeft: "5px" }}
-                />
-              )}
-            </button>
+
+            { getFavoritesButton(recipe) }
           </section>
         ))}
       </div>

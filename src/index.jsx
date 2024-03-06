@@ -22,44 +22,45 @@ const WelcomePage = () => {
   const [isHovering, setIsHovering] = useState(false);
  
 
-  useEffect(() => {
-    const auth = getAuth();
+//   useEffect(() => {
+//     const auth = getAuth();
 
-    // OnAuthStateChanged, is from firebase, checks for changes in authentication state
-    // if that wasn't there basically, the site wouldn't be able to fetch the user's authentication state in time
-    //  In short, checks whether user is logged in or not
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // If user is signed in, gets first and last name, also sets 'logged in' to true
-        const userRef = ref(database, "users/" + user.uid);
-        onValue(userRef, (snapshot) => {
-          const userData = snapshot.val();
-          setUserFirstName(userData.firstName);
-          setUserLastName(userData.lastName);
-          setIsLoggedIn(true);
-          console.log(
-            "User:",
-            userData.firstName,
-            userData.lastName,
-            " is signed in."
-          );
-        });
-      } else {
-        // User is signed out, clear the user's first name and last name
-        setUserFirstName("");
-        setUserLastName("");
-        setIsLoggedIn(false);
-        console.log("No User is signed in");
-      }
-    });
+//     // OnAuthStateChanged, is from firebase, checks for changes in authentication state
+//     // if that wasn't there basically, the site wouldn't be able to fetch the user's authentication state in time
+//     //  In short, checks whether user is logged in or not
+//     const unsubscribe = onAuthStateChanged(auth, (user) => {
+//       if (user) {
+//         // If user is signed in, gets first and last name, also sets 'logged in' to true
+//         const userRef = ref(database, "users/" + user.uid);
+//         onValue(userRef, (snapshot) => {
+    
+//           const userData = snapshot.val();
+//           setUserFirstName(userData.firstName);
+//           setUserLastName(userData.lastName);
+//           setIsLoggedIn(true);
+//           console.log(
+//             "User:",
+//             userData.firstName,
+//             userData.lastName,
+//             " is signed in."
+//           );
+//         });
+//       } else {
+//         // User is signed out, clear the user's first name and last name
+//         setUserFirstName("");
+//         setUserLastName("");
+//         setIsLoggedIn(false);
+//         console.log("No User is signed in");
+//       }
+//     });
 
 
 
-    // Cleans up from onauthstatechange, prevents memory leakage
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+//     // Cleans up from onauthstatechange, prevents memory leakage
+//     return () => {
+//       unsubscribe();
+//     };
+//   }, []);
 
   return (
     <>
