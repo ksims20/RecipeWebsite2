@@ -4,7 +4,6 @@ import { IonIcon } from "@ionic/react";
 import "./css/login.css";
 import { Link } from "react-router-dom";
 import UserInfoPop from "./UserInfoPopover.jsx";
-import { Popover, Button } from "antd";
 import { notification } from "antd";
 
 import {
@@ -40,6 +39,12 @@ const Login = () => {
             userData.lastName,
             " is signed in."
           );
+          // set user info to local storage when user logs in
+          console.log("User", user);
+          localStorage.setItem("lastName", userData.lastName);
+          localStorage.setItem("firstName", userData.firstName);
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("uid", user.uid);
         });
       } else {
         setUserFirstName("");
@@ -62,8 +67,8 @@ const Login = () => {
       // Fetches user information from the database
       const user = auth.currentUser;
       if (user) {
-         // Display a notification for successful login
-         notification.success({
+        // Display a notification for successful login
+        notification.success({
           message: "Log in successful!",
           duration: 2, //in seconds
         });
@@ -72,13 +77,11 @@ const Login = () => {
         setTimeout(() => {
           window.location.href = "/";
         }, 2000); // redirects after 2 seconds
-
-       
       } else {
         notification.error({
           message: "Log in unsuccessful",
           description: "Invalid email or password :(",
-          duration: 3, // in seconds 
+          duration: 3, // in seconds
         });
         console.error("User not found");
       }
@@ -93,7 +96,6 @@ const Login = () => {
         setUserLastName(userData.lastName);
       });
     } catch (error) {
-     
       console.error("Login Error", error.message);
     }
   };

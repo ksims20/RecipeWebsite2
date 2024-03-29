@@ -99,6 +99,19 @@ body{
     color: rgb(223, 186, 36);
   }
 
+  /* start of Favorites grid */
+
+  .favorites-container {
+    display: grid;
+    grid-template-columns: repeat(4, 0.25fr);
+    margin-left: 20px;
+    row-gap: 30px;
+    padding-top: auto;
+    font-family: 'Varela Round', sans-serif;
+    margin-bottom: 30px;
+}
+
+
 @media screen and (max-width:900px){
     .color{
         grid-template-columns: repeat(2,1fr);  

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { homeOutline, personOutline } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 import "./css/register.css";
@@ -7,10 +7,6 @@ import { notification } from "antd";
 
 import {getAuth,createUserWithEmailAndPassword,onAuthStateChanged,} from "firebase/auth";
 import { database, ref, set } from "./firebase.js"; //imports firebase
-import { onValue } from "firebase/database";
-
-import UserInfoPop from "./UserInfoPopover.jsx";
-import { Popover, Button } from "antd";
 
 
 // initialzing the auth variable

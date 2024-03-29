@@ -163,7 +163,7 @@ section{
 }
 
 #breakfast-results img {
-    max-width: 50%;
+    /* max-width: 50%; */
     border-radius: 2%;
     object-fit: cover;
     
@@ -171,27 +171,23 @@ section{
 
 
 #lunch-results img {
-    max-width: 50%;
     border-radius: 2%;
     object-fit: cover;
     
 }
 #dinner-results img {
-    max-width: 50%;
     border-radius: 2%;
     object-fit: cover;
     
 }
 
 #dessert-results img {
-    max-width: 50%;
     border-radius: 2%;
     object-fit: cover;
     
 }
 
 #vegan-results img {
-    max-width: 50%;
     border-radius: 2%;
     object-fit: cover;
     
@@ -238,17 +234,17 @@ button, .SearchButton{
     background-color: black;
     color:white;
 }
-button, .SerachButton:hover{
+button, .SearchButton:hover{
     color: rgb(223, 186, 36);
     font-weight: 600;
 }
 
 button, .results-container button {
-    padding: 6px 12px;
-    border-radius: 15px;
-    border: solid 1px #FFF;
-    background-color: black;
-    color: white;
+    padding: 0px 12px 0px 12px;
+    border-radius: 10px;
+    border: solid 1px black;
+    background-color: transparent;
+    color: black;
     /* grid-column: 2; */
     justify-self: flex-start;
 }
@@ -292,3 +288,4 @@ button, #FavoriteButton:hover{
         max-width: 80px;
     }
 }
+

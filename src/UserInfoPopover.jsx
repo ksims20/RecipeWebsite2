@@ -31,6 +31,11 @@ const UserInfoPop = ({ firstName, lastName }) => {
       .then(() => {
         // Logout successful
         setLoggedIn(false); // Update login status
+        localStorage.removeItem("lastName");
+        localStorage.removeItem("firstName");
+        localStorage.removeItem("email");
+        localStorage.removeItem("uid");
+        localStorage.clear();
       })
       .catch((error) => {
         // Handle logout error

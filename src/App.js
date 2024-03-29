@@ -1,17 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import WelcomePage from './index.jsx';
-import Login from './login.jsx';
-import AboutUs from './About.jsx';
-import Register from './register.jsx';
-import Breakfast from './breakfast.jsx';
-import Lunch from './lunch.jsx';
-import Dinner from './dinner.jsx';
-import Dessert from './dessert.jsx';
-import CommonLayout from './RecipeLayout.jsx';
-import Favorites from './Favs.jsx';
-import Vegan from './vegan.jsx';
-import './css/index2.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WelcomePage from "./index.jsx";
+import Login from "./login.jsx";
+import AboutUs from "./About.jsx";
+import Register from "./register.jsx";
+import Breakfast from "./breakfast.jsx";
+import Lunch from "./lunch.jsx";
+import Dinner from "./dinner.jsx";
+import Dessert from "./dessert.jsx";
+import CommonLayout from "./RecipeLayout.jsx";
+import Favorites from "./Favs.jsx";
+import Vegan from "./vegan.jsx";
+import "./css/index2.css";
+
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -29,13 +30,12 @@ const firebaseConfig = {
   storageBucket: "capstone2-f5acb.appspot.com",
   messagingSenderId: "578810233758",
   appId: "1:578810233758:web:a3a5e23d4345da5e0b8c8f",
-  measurementId: "G-Z8V6JJ3ZWQ"
+  measurementId: "G-Z8V6JJ3ZWQ",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
 
 const App = () => {
   return (

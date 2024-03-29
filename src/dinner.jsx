@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import CommonLayout from './RecipeLayout';
+import { getAuth } from "firebase/auth";
+import { ref, set, child, database } from "./firebase";
 import './css/pick.css';  
-import { Drawer } from 'antd';
+import { Drawer, Card, Button } from "antd";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
 
 const baseURL = "https://www.themealdb.com/api/json/v2/1/";
@@ -15,10 +17,20 @@ const Dinner = ({ isLoggedIn }) => {
 
   // keeps track of pages? 
   
-  const toggleFavorite = (recipe) => {
-    if (favorites.includes(recipe.idMeal)){
-      setFavorites(favorites.filter(id => id !== recipe.idMeal));
+  const toggleFavorite = async (recipe) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const uid = user.uid;
+    const favoritesRef = ref(database, `favorites/${uid}`);
+    const isRecipeFavorite = favorites.includes(recipe.idMeal);
+  
+    if (isRecipeFavorite) {
+      // Remove recipe from favorites
+      await set(child(favoritesRef, recipe.idMeal), null);
+      setFavorites(favorites.filter((id) => id !== recipe.idMeal));
     } else {
+      // Add recipe to favorites
+      await set(child(favoritesRef, recipe.idMeal), recipe);
       setFavorites([...favorites, recipe.idMeal]);
     }
   };
@@ -82,6 +94,8 @@ const Dinner = ({ isLoggedIn }) => {
     }
     return ingredients;
   };
+
+
 
   const searchForRecipes = async (event, category) => {
     event.preventDefault();
@@ -174,18 +188,37 @@ const Dinner = ({ isLoggedIn }) => {
       </form>
 
       <div id="dinner-results" className="results-container">
-        {recipes.map((recipe) => (
-          <section key={recipe.idMeal}>
-            <img src={recipe.strMealThumb} alt={recipe.strMeal} />
-            <p>{recipe.strMeal}</p>
-            <button class="SearchButton" onClick={() => showDrawer(recipe)}>Show more</button>
-            <button id="FavoriteButton" onClick={() => toggleFavorite(recipe)}>
-              {isFavorite(recipe) ?
-              <StarFilled style={{ fontSize: "24px", paddingLeft: "5px"}} /> :
-              <StarOutlined style={{ fontSize: "24px", paddingLeft: "5px" }} /> 
-              }
-            </button>
-          </section>
+      {recipes.map((recipe) => (
+          <Card
+            key={recipe.idMeal}
+            hoverable
+            style={{ width: 300, margin: 20 }}
+            cover={<img src={recipe.strMealThumb} alt={recipe.strMeal} />}
+            actions={[
+              <Button className="SearchButton" onClick={() => showDrawer(recipe)}>
+                Show more
+              </Button>,
+
+                getAuth().currentUser ? (
+                  <Button
+                    className="SearchButton"
+                    onClick={() => toggleFavorite(recipe)}
+                  >
+                    {isFavorite(recipe) ? (
+                      <StarFilled
+                        style={{ fontSize: "24px", paddingLeft: "5px" }}
+                      />
+                    ) : (
+                      <StarOutlined
+                        style={{ fontSize: "24px", paddingLeft: "5px" }}
+                      />
+                    )}
+                  </Button>
+                ) : null,
+                ]}
+                >
+            <Card.Meta title={recipe.strMeal} />
+          </Card>
         ))}
       </div>
 

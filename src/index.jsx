@@ -5,9 +5,10 @@ import "./css/index2.css";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref, onValue } from "firebase/database";
-import { database, set } from "./firebase.js"; //imports firebase
+import { database } from "./firebase.js"; //imports firebase
+
 import UserInfoPop from "./UserInfoPopover.jsx";
-import { Popover, Button } from "antd";
+
 
 
 //Front page
@@ -20,7 +21,7 @@ const WelcomePage = () => {
   //Options for the logged in system, in addition deals with user hovering over the person icon
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
- 
+
 
   useEffect(() => {
     const auth = getAuth();
@@ -53,14 +54,15 @@ const WelcomePage = () => {
       }
     });
 
-
-
     // Cleans up from onauthstatechange, prevents memory leakage
     return () => {
       unsubscribe();
     };
   }, []);
 
+
+  
+ 
   return (
     <>
       <div className="TopMenu">
