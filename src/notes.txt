@@ -1,3 +1,5 @@
+#### If running on a new computer, make sure to do "NPM install" first, then "npm run"
+
 reportWebVitals.js:
 
 Purpose: Measures various web vitals and provides a function to report the results.
